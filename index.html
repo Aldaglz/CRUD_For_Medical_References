@@ -3,30 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRUD for medical references</title>
+    <title>Bibliografía APS México</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <h1>Gestor de Links</h1>
+    <h1>Bibliografía de Atención Primaria de Salud</h1>
 
-    <div class="form-container">
-        <input type="text" id="titulo" placeholder="Título del link">
-        <input type="text" id="url" placeholder="URL (https://...)">
-        <button onclick="agregarLink()">Guardar</button>
-    </div>
-
-    <table id="tablaLinks">
+    <table>
         <thead>
             <tr>
-                <th>Título</th>
-                <th>URL</th>
-                <th>Acciones</th>
+                <th>Nombre</th>
+                <th>Link</th>
+                <th>Visitar</th>
             </tr>
         </thead>
-        <tbody></tbody>
+        <tbody id="tabla"></tbody>
     </table>
-
     <script src="app.js"></script>
 </body>
 </html>
