@@ -1,50 +1,352 @@
+/* ===== PALETA (MISMA QUE TU VERSIÓN ACTUAL) ===== */
+:root {
+    --azul-oscuro: #012A78;
+    --azul-medio: #003C9D;
+    --azul-claro: #1E4FB8;
+    --azul-suave: #2A63CC;
+
+    --dorado: #F9C80E;
+    --naranja: #F7A325;
+
+    --glass-bg: rgba(255, 255, 255, 0.12);
+    --glass-bg-strong: rgba(255, 255, 255, 0.18);
+    --glass-border: rgba(255, 255, 255, 0.35);
+    --glass-shadow: rgba(0, 0, 0, 0.25);
+}
+
+/* ===== FONDO ===== */
 body {
-    font-family: Arial, sans-serif;
-    background: #f8f8f8;
-    padding: 20px;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(180deg, var(--azul-oscuro), var(--azul-medio));
+    min-height: 100vh;
+    padding: 30px;
+    color: white;
 }
 
-h1 {
+/* ===== LOGO ===== */
+.header-image {
     text-align: center;
-}
-
-.form-container {
-    display: flex;
-    gap: 10px;
     margin-bottom: 20px;
 }
 
-input {
-    padding: 10px;
-    width: 30%;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+.header-image img {
+    max-width: 180px;
+    height: auto;
+    border-radius: 18px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.35);
+    backdrop-filter: blur(8px);
 }
 
-button {
-    padding: 10px 20px;
-    background: #007bff;
-    border: none;
+/* ===== TÍTULO ===== */
+h1 {
+    text-align: center;
+    margin-bottom: 25px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+}
+
+/* ===== BUSCADOR & ORDEN ===== */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    gap: 20px;
+}
+
+#buscador, #orden {
+    padding: 12px;
+    width: 48%;
+    border-radius: 14px;
+    border: 1px solid var(--glass-border);
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
     color: white;
-    border-radius: 5px;
+    transition: 0.3s;
+}
+
+#buscador::placeholder {
+    color: rgba(255,255,255,0.6);
+}
+
+#buscador:focus, #orden:focus {
+    border-color: var(--dorado);
+    box-shadow: 0 0 10px var(--dorado);
+    outline: none;
+}
+
+/* ===== TABLA GLASS ===== */
+table {
+    width: 100%;
+    background: var(--glass-bg-strong);
+    backdrop-filter: blur(14px);
+    border-collapse: collapse;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 0 25px var(--glass-shadow);
+}
+
+/* ===== CABECERA ===== */
+th {
+    background: linear-gradient(90deg, var(--dorado), var(--naranja));
+    color: #0A2A66;
+    padding: 14px;
+    font-size: 15px;
+    text-transform: uppercase;
+}
+
+/* ===== CELDAS ===== */
+td {
+    padding: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    color: #E6ECFF;
+    font-size: 15px;
+}
+
+tr:hover {
+    background: rgba(255,255,255,0.15);
+}
+
+/* ===== ÍNDICE (BOTÓN DE COPIAR) ===== */
+.copy-index {
     cursor: pointer;
+    font-weight: bold;
+    color: var(--dorado);
+}
+
+.copy-index:hover {
+    color: var(--naranja);
+    text-shadow: 0 0 10px var(--dorado);
+}
+
+/* ===== BOTÓN “VISITAR” ===== */
+button {
+    padding: 8px 14px;
+    background: linear-gradient(90deg, var(--dorado), var(--naranja));
+    border: none;
+    color: #0A2A66;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.3);
 }
 
 button:hover {
-    background: #0059b3;
+    transform: scale(1.05);
+    background: linear-gradient(90deg, var(--naranja), var(--dorado));
 }
+
+/* ===== TOAST ===== */
+.toast {
+    visibility: hidden;
+    min-width: 140px;
+    background: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    text-align: center;
+    border-radius: 10px;
+    padding: 12px 20px;
+    position: fixed;
+    z-index: 1000;
+    left: 50%;
+    bottom: 35px;
+    transform: translateX(-50%);
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.4s, visibility 0.4s;
+}
+
+.toast.show {
+    visibility: visible;
+    opacity: 1;
+}
+/* ========================= */
+/*    BOTÓN IR ARRIBA        */
+/* ========================= */
+#btnArriba {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    font-weight: bold;
+    background: linear-gradient(140deg, var(--dorado), var(--naranja));
+    color: #0A2A66;
+    box-shadow: 0 0 18px rgba(255, 255, 255, 0.45),
+                0 0 25px rgba(249, 200, 14, 0.8);
+    backdrop-filter: blur(6px);
+    display: none;
+    transition: 0.3s;
+}
+
+#btnArriba:hover {
+    transform: scale(1.15) rotate(8deg);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.6),
+                0 0 35px rgba(249, 200, 14, 1);
+}
+
+/* ========================= */
+/*   TEXTO MÁS GRANDE        */
+/* ========================= */
+td, th {
+    font-size: 17px !important;
+}
+
+/* ========================= */
+/*    EFECTO NEÓN EN TABLA   */
+/* ========================= */
 
 table {
-    width: 100%;
+    border: 2px solid rgba(249,200,14,0.7);
+    box-shadow: 0 0 10px rgba(249,200,14,0.4),
+                0 0 30px rgba(249,200,14,0.3);
+}
+
+/* Hover animado tipo "elevación" */
+tr:hover {
+    background: rgba(255,255,255,0.18);
+    transform: scale(1.01);
+    transition: 0.2s ease-in-out;
+}
+
+/* Neón suave en botones */
+button {
+    box-shadow: 0 0 8px rgba(249,200,14,0.6);
+}
+
+button:hover {
+    box-shadow: 0 0 20px rgba(249,200,14,1);
+}
+
+/* Neón en inputs */
+#buscador, #orden {
+    box-shadow: 0 0 8px rgba(255,255,255,0.28);
+}
+
+#buscador:focus, #orden:focus {
+    box-shadow: 0 0 18px rgba(249,200,14,0.9);
+}
+/* ====================================================== */
+/*                 🌐 RESPONSIVE DESIGN                   */
+/* ====================================================== */
+
+/* 📱 Celulares (pantallas menores a 768px) */
+@media (max-width: 768px) {
+
+    body {
+        padding: 15px;
+    }
+
+    /* Logo más pequeño */
+    .header-image img {
+        max-width: 140px;
+    }
+
+    /* Título centrado y más pequeño */
+    h1 {
+        font-size: 22px;
+        margin-bottom: 15px;
+    }
+
+    /* Input y select apilados */
+    .top-bar {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    #buscador, #orden {
+        width: 100%;
+        font-size: 15px;
+        padding: 10px;
+    }
+
+    /* Tabla: texto más compacto */
+    th, td {
+        font-size: 14px !important;
+        padding: 10px;
+    }
+
+    /* Ocultar columna de URL si quieres (opcional)
+    td:nth-child(3), th:nth-child(3) {
+        display: none;
+    }
+    */
+
+    /* Botón visitar más grande */
+    button {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    /* Botón "ir arriba" más pequeño */
+    #btnArriba {
+        width: 45px;
+        height: 45px;
+        font-size: 20px;
+        bottom: 15px;
+        right: 15px;
+    }
+}
+
+/* 📟 Tablets pequeñas (768px – 1024px) */
+@media (max-width: 1024px) {
+
+    .top-bar {
+        gap: 20px;
+    }
+
+    #buscador, #orden {
+        width: 100%;
+    }
+
+    table {
+        font-size: 15px;
+    }
+}
+
+/* 🖥️ Pantallas ultra grandes (1600px+) */
+@media (min-width: 1600px) {
+
+    body {
+        padding: 50px;
+    }
+
+    table {
+        max-width: 1500px;
+        margin: auto;
+    }
+
+    th, td {
+        font-size: 18px !important;
+    }
+
+    button {
+        font-size: 17px;
+    }
+}
+/* ============================================= */
+/*      OCULTAR COLUMNA LINK EN PANTALLAS CHICAS */
+/* ============================================= */
+
+@media (max-width: 768px) {
+
+    /* Oculta encabezado de la columna Link */
+    th:nth-child(3) {
+        display: none;
+    }
+
+    /* Oculta las celdas de la columna Link */
+    td:nth-child(3) {
+        display: none;
+    }
+}
+#orden option {
+    color: black;
     background: white;
-    border-collapse: collapse;
 }
-
-th, td {
-    padding: 12px;
-    border-bottom: 1px solid #ddd;
-}
-
-.actions button {
-    margin-right: 8px;
+#orden {
+    color: white !important;
 }
