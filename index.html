@@ -7,12 +7,30 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="header-image">
+    <img src="img/logo.jpg" alt="Logo APS">
+</div>
 
-    <h1>Bibliografía de Atención Primaria de Salud</h1>
+<h1>Bibliografía de Atención Primaria de Salud</h1>
+
+    <div class="top-bar">
+        <input 
+            type="text" 
+            id="buscador" 
+            placeholder="Buscar artículo por nombre..."
+            oninput="filtrarTabla()"
+        >
+
+        <select id="orden" onchange="aplicarOrden()">
+            <option value="az" selected>A → Z</option>
+            <option value="za">Z → A</option>
+        </select>
+    </div>
 
     <table>
         <thead>
             <tr>
+                <th>#</th>
                 <th>Nombre</th>
                 <th>Link</th>
                 <th>Visitar</th>
@@ -21,5 +39,8 @@
         <tbody id="tabla"></tbody>
     </table>
     <script src="app.js"></script>
+    <div id="toast" class="toast">Link copiado</div>
+<button id="btnArriba" onclick="irArriba()">▲</button>
+
 </body>
 </html>

@@ -238,6 +238,69 @@ const links = [
 
     { nombre: "Experiencias de médicos de primer contacto.",
       url: "https://revistamedica.imss.gob.mx/index.php/revista_medica/article/view/4811" },
+
+    { nombre: "Archivos de Medicina Interna (UNAM) — APS México",
+      url: "https://biblat.unam.mx/hevila/Archivosdemedicinainterna/2011/vol33/no1/3.pdf" },
+
+    { nombre: "Salud Problema (UAM-Xochimilco) — Atención Primaria",
+      url: "https://saludproblemaojs.xoc.uam.mx/index.php/saludproblema/article/download/584/584" },
+
+    { nombre: "CIDE — Documento técnico APS México",
+      url: "https://cide.repositorioinstitucional.mx/jspui/bitstream/1011/806/1/000002782_documento.pdf" },
+
+    { nombre: "COFEMER — Modelo de Atención en Salud",
+      url: "https://www.cofemersimir.gob.mx/expediente/9745/mir/23225/archivo/738558" },
+
+    { nombre: "SciELO México — Artículo sobre APS 2011",
+      url: "https://www.scielo.org.mx/scielo.php?script=sci_arttext&pid=S0036-36342011000800017" },
+
+    { nombre: "Secretaría de Salud — Distritos de Salud",
+      url: "http://sidss.salud.gob.mx/site2/docs/Distritos_de_Salud_VF.pdf" },
+
+    { nombre: "IMSS-Bienestar — Modelo de Atención a la Salud",
+      url: "https://www.imss.gob.mx/sites/all/statics/imssBienestar/marcoJuridico/Acuerdo-Modelo-Atencion-Salud-Bienestar.pdf" },
+
+    { nombre: "Gobierno de México — Informe Desafíos APS 2021",
+      url: "https://www.gob.mx/cms/uploads/attachment/file/651873/Informe_Desaf_os_APS_ENERO_2021_final.pdf" },
+
+    { nombre: "Guía de Estudio de APS — Secretaría de Salud",
+      url: "https://www.gob.mx/cms/uploads/attachment/file/828977/Gu_a_de_Estudio_APS.pdf" },
+
+    { nombre: "APS — Estudio en PMC (PubMed Central)",
+      url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC6985524/" },
+
+    { nombre: "Retos e Innovación en Ciencias Básicas — APS",
+      url: "https://www.cucs.udg.mx/libros/Retos_e_innovacion_desde_ciencias_basicas_2023.pdf" },
+
+    { nombre: "Calidad Salud Pública — Evaluación de Servicios",
+      url: "https://encuestas.insp.mx/calidad/descargar.php?path=ZG9jdG9zLzBUdzhpVVJ6dHZacmR4WjVuTDFwbXY1RDU5VUd6Yy5wZGY=&file=RmFqYXJkbyB5IGNvbHMgQ2FsaWRhZCBTYWx1ZCBQw7pibGljYS5wZGY=" },
+
+    { nombre: "IMSS — Colección APS Tomo 2",
+      url: "https://www.imss.gob.mx/sites/all/statics/coleccion-80/dpm/tomo-02-atencion-primaria.pdf" },
+
+    { nombre: "Calidad de Atención en México — Secretaría de Salud",
+      url: "https://calidad.salud.gob.mx/site/editorial/docs/calidad_atencion_salud_enMexico_segunda_edicion.pdf" },
+
+    { nombre: "Informe Desafíos APS 2021 — Gobierno de México",
+      url: "https://www.gob.mx/cms/uploads/attachment/file/651873/Informe_Desaf_os_APS_ENERO_2021_final.pdf" },
+
+    { nombre: "Calidad del primer nivel de atención — OMM",
+      url: "https://omm.org.mx/wp-content/uploads/2020/04/Calidad-del-primer-nivel-de-atención-de-los-Servicios-Estatales-de-Salud.pdf" },
+
+    { nombre: "CONEVAL — Evaluación Estratégica Salud APS",
+      url: "https://www.coneval.org.mx/EvaluacionDS/PP/CEIPP/IEPSM/Documents/Evaluacion_Estrategica_Salud_Primer_Informe.pdf" },
+
+    { nombre: "UNAM — Atención Familiar (artículo APS)",
+      url: "https://www.revistas.unam.mx/index.php/atencion_familiar/article/view/77663" },
+
+    { nombre: "SciELO México — APS 2016",
+      url: "https://www.scielo.org.mx/scielo.php?script=sci_arttext&pid=S0036-36342016000500569" },
+
+    { nombre: "SciELO México — APS 2021",
+      url: "https://www.scielo.org.mx/scielo.php?script=sci_arttext&pid=S2444-054X2021000600846" },
+
+    { nombre: "Salud Colectiva (Argentina) — Atención Primaria",
+      url: "https://revistas.unla.edu.ar/saludcolectiva/article/view/221" },
 ];
 
 function cargarTabla() {
@@ -260,3 +323,103 @@ function cargarTabla() {
 }
 
 cargarTabla();
+let listaActual = [...links]; 
+let ordenActual = "az";
+let filtroActual = "";
+
+function ordenarLista() {
+    listaActual.sort((a, b) => {
+        if (ordenActual === "az") {
+            return a.nombre.localeCompare(b.nombre, 'es', { sensitivity: 'base' });
+        } else {
+            return b.nombre.localeCompare(a.nombre, 'es', { sensitivity: 'base' });
+        }
+    });
+}
+
+function filtrarTabla() {
+    filtroActual = document.getElementById("buscador").value.toLowerCase();
+
+    listaActual = links.filter(item =>
+        item.nombre.toLowerCase().includes(filtroActual)
+    );
+
+    ordenarLista();
+    renderTabla();
+}
+
+// --- Cambiar orden ---
+function aplicarOrden() {
+    ordenActual = document.getElementById("orden").value;
+    ordenarLista();
+    renderTabla();
+}
+
+// --- Renderizar la tabla ---
+function renderTabla() {
+    const tbody = document.getElementById("tabla");
+    tbody.innerHTML = "";
+
+    listaActual.forEach((item, index) => {
+        const fila = `
+            <tr>
+                <td class="copy-index" onclick="copiarLink('${item.url}')">
+                    ${index + 1}
+                </td>
+                <td>${item.nombre}</td>
+                <td>${item.url}</td>
+                <td>
+                    <button onclick="window.open('${item.url}', '_blank')">
+                        Visitar sitio
+                    </button>
+                </td>
+            </tr>
+        `;
+        tbody.innerHTML += fila;
+    });
+}
+
+function copiarLink(url) {
+    navigator.clipboard.writeText(url)
+        .then(() => {
+            mostrarMensaje("Link copiado");
+        })
+        .catch(err => {
+            console.error("Error al copiar:", err);
+        });
+}
+
+function mostrarMensaje(texto) {
+    const toast = document.getElementById("toast");
+    toast.textContent = texto;
+    toast.classList.add("show");
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 1500);
+}
+// Mostrar el botón cuando se hace scroll
+window.onscroll = function() {
+    const btn = document.getElementById("btnArriba");
+    if (document.documentElement.scrollTop > 200) {
+        btn.style.display = "block";
+    } else {
+        btn.style.display = "none";
+    }
+};
+
+// Función para volver arriba
+function irArriba() {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+document.getElementById("orden").addEventListener("change", function () {
+    this.style.color = "white";
+});
+
+// Inicialización
+ordenarLista();
+renderTabla();
+
